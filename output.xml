@@ -1,0 +1,1782 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 6.1.1 (Python 3.12.1 on win32)" generated="20240122 18:08:06.666" rpa="false" schemaversion="4">
+<suite id="s1" name="Demo" source="D:\THUY\RobotFramework\demo.robot">
+<test id="s1-t1" name="TC01" line="21">
+<kw name="Open Test page" type="SETUP">
+<kw name="Open Excel file">
+<arg>${ExcelFile}</arg>
+<kw name="Generate Random String" library="String">
+<var>${i}</var>
+<arg>1</arg>
+<arg>[NUMBERS]</arg>
+<doc>Generates a string with a desired ``length`` from the given ``chars``.</doc>
+<msg timestamp="20240122 18:08:09.172" level="INFO">${i} = 6</msg>
+<status status="PASS" starttime="20240122 18:08:09.172" endtime="20240122 18:08:09.172"/>
+</kw>
+<kw name="Open Excel Document" library="ExcelLibrary">
+<var>${doc_id}</var>
+<arg>${ExcelFile}</arg>
+<arg>doc_id=docid${i}</arg>
+<doc>Opens xlsx document file.</doc>
+<msg timestamp="20240122 18:08:09.178" level="INFO">${doc_id} = docid6</msg>
+<status status="PASS" starttime="20240122 18:08:09.172" endtime="20240122 18:08:09.178"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:09.171" endtime="20240122 18:08:09.178"/>
+</kw>
+<kw name="Get data row from Excel file">
+<var>${rd}</var>
+<arg>1</arg>
+<kw name="Read Excel Row" library="ExcelLibrary">
+<var>${rd}</var>
+<arg>row_num=${rowNum}</arg>
+<arg>max_num=${maxnum}</arg>
+<arg>sheet_name=${SheetName}</arg>
+<doc>Returns content of a row from the current sheet of the document.</doc>
+<msg timestamp="20240122 18:08:09.179" level="INFO">${rd} = ['URL', 'https://testsigma.com/blog/test-data/', None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None]</msg>
+<status status="PASS" starttime="20240122 18:08:09.178" endtime="20240122 18:08:09.179"/>
+</kw>
+<msg timestamp="20240122 18:08:09.179" level="INFO">${rd} = ['URL', 'https://testsigma.com/blog/test-data/', None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None]</msg>
+<status status="PASS" starttime="20240122 18:08:09.178" endtime="20240122 18:08:09.179"/>
+</kw>
+<kw name="Open Browser" library="SeleniumLibrary">
+<arg>${rd}[1]</arg>
+<arg>chrome</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<msg timestamp="20240122 18:08:09.179" level="INFO">Opening browser 'chrome' to base url 'https://testsigma.com/blog/test-data/'.</msg>
+<status status="PASS" starttime="20240122 18:08:09.179" endtime="20240122 18:08:14.874"/>
+</kw>
+<kw name="Maximize Browser Window" library="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" starttime="20240122 18:08:14.874" endtime="20240122 18:08:15.004"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:09.171" endtime="20240122 18:08:15.004"/>
+</kw>
+<kw name="Validation check for items in excel file">
+<kw name="Get data col from Excel file">
+<var>${list_to_check}</var>
+<arg>2</arg>
+<kw name="Read Excel Column" library="ExcelLibrary">
+<var>${cd}</var>
+<arg>col_num=${colNum}</arg>
+<arg>max_num=${maxnum}</arg>
+<arg>sheet_name=${SheetName}</arg>
+<doc>Returns content of a column from the current sheet of the document.</doc>
+<msg timestamp="20240122 18:08:15.005" level="INFO">${cd} = ['https://testsigma.com/blog/test-data/', 'itemName', 'firstname', 'firstname', 'firstname', 'lastname', 'lastname', 'email', 'email', 'email', 'email', 'company', 'company', 'company', 'Submit', None...</msg>
+<status status="PASS" starttime="20240122 18:08:15.004" endtime="20240122 18:08:15.005"/>
+</kw>
+<msg timestamp="20240122 18:08:15.005" level="INFO">${list_to_check} = ['https://testsigma.com/blog/test-data/', 'itemName', 'firstname', 'firstname', 'firstname', 'lastname', 'lastname', 'email', 'email', 'email', 'email', 'company', 'company', 'company', 'Submit', None...</msg>
+<status status="PASS" starttime="20240122 18:08:15.004" endtime="20240122 18:08:15.005"/>
+</kw>
+<for flavor="IN RANGE">
+<var>${index}</var>
+<value>2</value>
+<value>${list_to_check.__len__()}</value>
+<iter>
+<var name="${index}">2</var>
+<kw name="Set Variable" library="BuiltIn">
+<var>${value}</var>
+<arg>${list_to_check}[${index}]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20240122 18:08:15.006" level="INFO">${value} = firstname</msg>
+<status status="PASS" starttime="20240122 18:08:15.006" endtime="20240122 18:08:15.006"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>"${value}" != "None"</arg>
+<arg>Execute Function by checkType</arg>
+<arg>${index}</arg>
+<arg>ELSE</arg>
+<arg>Exit For Loop</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Execute Function by checkType">
+<arg>${index}</arg>
+<kw name="Get data row from Excel file">
+<var>${rd}</var>
+<arg>${i}</arg>
+<kw name="Read Excel Row" library="ExcelLibrary">
+<var>${rd}</var>
+<arg>row_num=${rowNum}</arg>
+<arg>max_num=${maxnum}</arg>
+<arg>sheet_name=${SheetName}</arg>
+<doc>Returns content of a row from the current sheet of the document.</doc>
+<msg timestamp="20240122 18:08:15.008" level="INFO">${rd} = ['itemType', 'itemName', 'Label', 'checkType', 'value', 'input1', 'input2', 'Expected', 'Result', 'Note', 'Image Path', None, None, None, None, None, None, None, None, None]</msg>
+<status status="PASS" starttime="20240122 18:08:15.007" endtime="20240122 18:08:15.008"/>
+</kw>
+<msg timestamp="20240122 18:08:15.008" level="INFO">${rd} = ['itemType', 'itemName', 'Label', 'checkType', 'value', 'input1', 'input2', 'Expected', 'Result', 'Note', 'Image Path', None, None, None, None, None, None, None, None, None]</msg>
+<status status="PASS" starttime="20240122 18:08:15.007" endtime="20240122 18:08:15.008"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${element}</var>
+<arg>${rd}[3]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20240122 18:08:15.008" level="INFO">${element} = checkType</msg>
+<status status="PASS" starttime="20240122 18:08:15.008" endtime="20240122 18:08:15.008"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${element}' == 'required'</arg>
+<arg>Run Keyword</arg>
+<arg>Verify Required Check</arg>
+<arg>${i}</arg>
+<arg>ELSE IF</arg>
+<arg>'${element}' == 'maxlength'</arg>
+<arg>Run Keyword</arg>
+<arg>Write and save to Excel</arg>
+<arg>${i}</arg>
+<arg>Function_maxlength is Executed</arg>
+<arg>10</arg>
+<arg>ELSE IF</arg>
+<arg>'${element}' == 'Dateformat'</arg>
+<arg>Run Keyword</arg>
+<arg>Log</arg>
+<arg>Function3 is Executed</arg>
+<arg>ELSE</arg>
+<arg>Log</arg>
+<arg>Function is not defined</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Log" library="BuiltIn">
+<arg>Function is not defined</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20240122 18:08:15.009" level="INFO">Function is not defined</msg>
+<status status="PASS" starttime="20240122 18:08:15.009" endtime="20240122 18:08:15.009"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.008" endtime="20240122 18:08:15.009"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.007" endtime="20240122 18:08:15.009"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.006" endtime="20240122 18:08:15.009"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.006" endtime="20240122 18:08:15.009"/>
+</iter>
+<iter>
+<var name="${index}">3</var>
+<kw name="Set Variable" library="BuiltIn">
+<var>${value}</var>
+<arg>${list_to_check}[${index}]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20240122 18:08:15.009" level="INFO">${value} = firstname</msg>
+<status status="PASS" starttime="20240122 18:08:15.009" endtime="20240122 18:08:15.009"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>"${value}" != "None"</arg>
+<arg>Execute Function by checkType</arg>
+<arg>${index}</arg>
+<arg>ELSE</arg>
+<arg>Exit For Loop</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Execute Function by checkType">
+<arg>${index}</arg>
+<kw name="Get data row from Excel file">
+<var>${rd}</var>
+<arg>${i}</arg>
+<kw name="Read Excel Row" library="ExcelLibrary">
+<var>${rd}</var>
+<arg>row_num=${rowNum}</arg>
+<arg>max_num=${maxnum}</arg>
+<arg>sheet_name=${SheetName}</arg>
+<doc>Returns content of a row from the current sheet of the document.</doc>
+<msg timestamp="20240122 18:08:15.010" level="INFO">${rd} = ['Input Textbox', 'firstname', 'First Name', 'required', None, None, None, 'First Nameを入力してください。', None, None, None, None, None, None, None, None, None, None, None, None]</msg>
+<status status="PASS" starttime="20240122 18:08:15.010" endtime="20240122 18:08:15.010"/>
+</kw>
+<msg timestamp="20240122 18:08:15.010" level="INFO">${rd} = ['Input Textbox', 'firstname', 'First Name', 'required', None, None, None, 'First Nameを入力してください。', None, None, None, None, None, None, None, None, None, None, None, None]</msg>
+<status status="PASS" starttime="20240122 18:08:15.010" endtime="20240122 18:08:15.010"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${element}</var>
+<arg>${rd}[3]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20240122 18:08:15.011" level="INFO">${element} = required</msg>
+<status status="PASS" starttime="20240122 18:08:15.011" endtime="20240122 18:08:15.011"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${element}' == 'required'</arg>
+<arg>Run Keyword</arg>
+<arg>Verify Required Check</arg>
+<arg>${i}</arg>
+<arg>ELSE IF</arg>
+<arg>'${element}' == 'maxlength'</arg>
+<arg>Run Keyword</arg>
+<arg>Write and save to Excel</arg>
+<arg>${i}</arg>
+<arg>Function_maxlength is Executed</arg>
+<arg>10</arg>
+<arg>ELSE IF</arg>
+<arg>'${element}' == 'Dateformat'</arg>
+<arg>Run Keyword</arg>
+<arg>Log</arg>
+<arg>Function3 is Executed</arg>
+<arg>ELSE</arg>
+<arg>Log</arg>
+<arg>Function is not defined</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Run Keyword" library="BuiltIn">
+<arg>Verify Required Check</arg>
+<arg>${i}</arg>
+<doc>Executes the given keyword with the given arguments.</doc>
+<kw name="Verify required Check">
+<arg>${i}</arg>
+<doc>This test case validates Required Check for item in row(i) in excel file</doc>
+<kw name="Get data row from Excel file">
+<var>${rd}</var>
+<arg>${i}</arg>
+<kw name="Read Excel Row" library="ExcelLibrary">
+<var>${rd}</var>
+<arg>row_num=${rowNum}</arg>
+<arg>max_num=${maxnum}</arg>
+<arg>sheet_name=${SheetName}</arg>
+<doc>Returns content of a row from the current sheet of the document.</doc>
+<msg timestamp="20240122 18:08:15.012" level="INFO">${rd} = ['Input Textbox', 'firstname', 'First Name', 'required', None, None, None, 'First Nameを入力してください。', None, None, None, None, None, None, None, None, None, None, None, None]</msg>
+<status status="PASS" starttime="20240122 18:08:15.012" endtime="20240122 18:08:15.012"/>
+</kw>
+<msg timestamp="20240122 18:08:15.012" level="INFO">${rd} = ['Input Textbox', 'firstname', 'First Name', 'required', None, None, None, 'First Nameを入力してください。', None, None, None, None, None, None, None, None, None, None, None, None]</msg>
+<status status="PASS" starttime="20240122 18:08:15.011" endtime="20240122 18:08:15.012"/>
+</kw>
+<kw name="Get data col from Excel file">
+<var>${cd}</var>
+<arg>2</arg>
+<kw name="Read Excel Column" library="ExcelLibrary">
+<var>${cd}</var>
+<arg>col_num=${colNum}</arg>
+<arg>max_num=${maxnum}</arg>
+<arg>sheet_name=${SheetName}</arg>
+<doc>Returns content of a column from the current sheet of the document.</doc>
+<msg timestamp="20240122 18:08:15.013" level="INFO">${cd} = ['https://testsigma.com/blog/test-data/', 'itemName', 'firstname', 'firstname', 'firstname', 'lastname', 'lastname', 'email', 'email', 'email', 'email', 'company', 'company', 'company', 'Submit', None...</msg>
+<status status="PASS" starttime="20240122 18:08:15.012" endtime="20240122 18:08:15.013"/>
+</kw>
+<msg timestamp="20240122 18:08:15.013" level="INFO">${cd} = ['https://testsigma.com/blog/test-data/', 'itemName', 'firstname', 'firstname', 'firstname', 'lastname', 'lastname', 'email', 'email', 'email', 'email', 'company', 'company', 'company', 'Submit', None...</msg>
+<status status="PASS" starttime="20240122 18:08:15.012" endtime="20240122 18:08:15.013"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${rd}[1]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20240122 18:08:15.014" level="INFO">Clicking element 'firstname'.</msg>
+<status status="PASS" starttime="20240122 18:08:15.013" endtime="20240122 18:08:15.096"/>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<arg>${cd}[14]</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<msg timestamp="20240122 18:08:15.096" level="INFO">Clicking button 'Submit'.</msg>
+<status status="PASS" starttime="20240122 18:08:15.096" endtime="20240122 18:08:15.156"/>
+</kw>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${actualText}</var>
+<arg>${msg_css}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20240122 18:08:15.199" level="INFO">${actualText} = Please complete this required field.</msg>
+<status status="PASS" starttime="20240122 18:08:15.157" endtime="20240122 18:08:15.200"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${expectedText}</var>
+<arg>${rd}[7]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20240122 18:08:15.200" level="INFO">${expectedText} = First Nameを入力してください。</msg>
+<status status="PASS" starttime="20240122 18:08:15.200" endtime="20240122 18:08:15.200"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>"${actualText}" == "${expectedText}"</arg>
+<arg>Write and save to Excel</arg>
+<arg>${i}</arg>
+<arg>OK</arg>
+<arg>9</arg>
+<arg>ELSE</arg>
+<arg>Result is NG</arg>
+<arg>${i}</arg>
+<arg>${actualText}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Result is NG">
+<arg>${i}</arg>
+<arg>${actualText}</arg>
+<kw name="Write and save to Excel">
+<arg>${i}</arg>
+<arg>NG</arg>
+<arg>9</arg>
+<kw name="Evaluate" library="BuiltIn">
+<var>${rowOffset}</var>
+<arg>${i}-1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20240122 18:08:15.201" level="INFO">${rowOffset} = 2</msg>
+<status status="PASS" starttime="20240122 18:08:15.201" endtime="20240122 18:08:15.201"/>
+</kw>
+<kw name="Write Excel Column" library="ExcelLibrary">
+<arg>col_num=${colNum}</arg>
+<arg>row_offset=${rowOffset}</arg>
+<arg>col_data=['${value}']</arg>
+<arg>sheet_name=${SheetName}</arg>
+<doc>Writes the data to a column.</doc>
+<status status="PASS" starttime="20240122 18:08:15.201" endtime="20240122 18:08:15.202"/>
+</kw>
+<kw name="Save Excel Document" library="ExcelLibrary">
+<arg>filename=${ExcelFile}</arg>
+<doc>Saves the current document to disk.</doc>
+<status status="PASS" starttime="20240122 18:08:15.202" endtime="20240122 18:08:15.218"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.201" endtime="20240122 18:08:15.218"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${note}</var>
+<arg>Actual Text: ${actualText}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20240122 18:08:15.218" level="INFO">${note} = Actual Text: Please complete this required field.</msg>
+<status status="PASS" starttime="20240122 18:08:15.218" endtime="20240122 18:08:15.218"/>
+</kw>
+<kw name="Write and save to Excel">
+<arg>${i}</arg>
+<arg>${note}</arg>
+<arg>10</arg>
+<kw name="Evaluate" library="BuiltIn">
+<var>${rowOffset}</var>
+<arg>${i}-1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20240122 18:08:15.219" level="INFO">${rowOffset} = 2</msg>
+<status status="PASS" starttime="20240122 18:08:15.219" endtime="20240122 18:08:15.219"/>
+</kw>
+<kw name="Write Excel Column" library="ExcelLibrary">
+<arg>col_num=${colNum}</arg>
+<arg>row_offset=${rowOffset}</arg>
+<arg>col_data=['${value}']</arg>
+<arg>sheet_name=${SheetName}</arg>
+<doc>Writes the data to a column.</doc>
+<status status="PASS" starttime="20240122 18:08:15.219" endtime="20240122 18:08:15.220"/>
+</kw>
+<kw name="Save Excel Document" library="ExcelLibrary">
+<arg>filename=${ExcelFile}</arg>
+<doc>Saves the current document to disk.</doc>
+<status status="PASS" starttime="20240122 18:08:15.220" endtime="20240122 18:08:15.240"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.218" endtime="20240122 18:08:15.240"/>
+</kw>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<var>${Img}</var>
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<msg timestamp="20240122 18:08:15.330" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-1.png"&gt;&lt;img src="selenium-screenshot-1.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg timestamp="20240122 18:08:15.330" level="INFO">${Img} = D:\THUY\RobotFramework\selenium-screenshot-1.png</msg>
+<status status="PASS" starttime="20240122 18:08:15.240" endtime="20240122 18:08:15.330"/>
+</kw>
+<kw name="Write and save to Excel">
+<arg>${i}</arg>
+<arg>${Img}</arg>
+<arg>11</arg>
+<kw name="Evaluate" library="BuiltIn">
+<var>${rowOffset}</var>
+<arg>${i}-1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20240122 18:08:15.330" level="INFO">${rowOffset} = 2</msg>
+<status status="PASS" starttime="20240122 18:08:15.330" endtime="20240122 18:08:15.330"/>
+</kw>
+<kw name="Write Excel Column" library="ExcelLibrary">
+<arg>col_num=${colNum}</arg>
+<arg>row_offset=${rowOffset}</arg>
+<arg>col_data=['${value}']</arg>
+<arg>sheet_name=${SheetName}</arg>
+<doc>Writes the data to a column.</doc>
+<status status="PASS" starttime="20240122 18:08:15.331" endtime="20240122 18:08:15.332"/>
+</kw>
+<kw name="Save Excel Document" library="ExcelLibrary">
+<arg>filename=${ExcelFile}</arg>
+<doc>Saves the current document to disk.</doc>
+<status status="PASS" starttime="20240122 18:08:15.332" endtime="20240122 18:08:15.344"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.330" endtime="20240122 18:08:15.344"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.200" endtime="20240122 18:08:15.345"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.200" endtime="20240122 18:08:15.345"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.011" endtime="20240122 18:08:15.345"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.011" endtime="20240122 18:08:15.345"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.011" endtime="20240122 18:08:15.345"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.009" endtime="20240122 18:08:15.345"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.009" endtime="20240122 18:08:15.345"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.009" endtime="20240122 18:08:15.345"/>
+</iter>
+<iter>
+<var name="${index}">4</var>
+<kw name="Set Variable" library="BuiltIn">
+<var>${value}</var>
+<arg>${list_to_check}[${index}]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20240122 18:08:15.345" level="INFO">${value} = firstname</msg>
+<status status="PASS" starttime="20240122 18:08:15.345" endtime="20240122 18:08:15.345"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>"${value}" != "None"</arg>
+<arg>Execute Function by checkType</arg>
+<arg>${index}</arg>
+<arg>ELSE</arg>
+<arg>Exit For Loop</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Execute Function by checkType">
+<arg>${index}</arg>
+<kw name="Get data row from Excel file">
+<var>${rd}</var>
+<arg>${i}</arg>
+<kw name="Read Excel Row" library="ExcelLibrary">
+<var>${rd}</var>
+<arg>row_num=${rowNum}</arg>
+<arg>max_num=${maxnum}</arg>
+<arg>sheet_name=${SheetName}</arg>
+<doc>Returns content of a row from the current sheet of the document.</doc>
+<msg timestamp="20240122 18:08:15.347" level="INFO">${rd} = ['Input Textbox', 'firstname', 'First Name', 'maxlength', 10, 1234567890, None, None, None, None, None, None, None, None, None, None, None, None, None, None]</msg>
+<status status="PASS" starttime="20240122 18:08:15.346" endtime="20240122 18:08:15.347"/>
+</kw>
+<msg timestamp="20240122 18:08:15.347" level="INFO">${rd} = ['Input Textbox', 'firstname', 'First Name', 'maxlength', 10, 1234567890, None, None, None, None, None, None, None, None, None, None, None, None, None, None]</msg>
+<status status="PASS" starttime="20240122 18:08:15.346" endtime="20240122 18:08:15.347"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${element}</var>
+<arg>${rd}[3]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20240122 18:08:15.347" level="INFO">${element} = maxlength</msg>
+<status status="PASS" starttime="20240122 18:08:15.347" endtime="20240122 18:08:15.347"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${element}' == 'required'</arg>
+<arg>Run Keyword</arg>
+<arg>Verify Required Check</arg>
+<arg>${i}</arg>
+<arg>ELSE IF</arg>
+<arg>'${element}' == 'maxlength'</arg>
+<arg>Run Keyword</arg>
+<arg>Write and save to Excel</arg>
+<arg>${i}</arg>
+<arg>Function_maxlength is Executed</arg>
+<arg>10</arg>
+<arg>ELSE IF</arg>
+<arg>'${element}' == 'Dateformat'</arg>
+<arg>Run Keyword</arg>
+<arg>Log</arg>
+<arg>Function3 is Executed</arg>
+<arg>ELSE</arg>
+<arg>Log</arg>
+<arg>Function is not defined</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Run Keyword" library="BuiltIn">
+<arg>Write and save to Excel</arg>
+<arg>${i}</arg>
+<arg>Function_maxlength is Executed</arg>
+<arg>10</arg>
+<doc>Executes the given keyword with the given arguments.</doc>
+<kw name="Write and save to Excel">
+<arg>${i}</arg>
+<arg>Function_maxlength is Executed</arg>
+<arg>10</arg>
+<kw name="Evaluate" library="BuiltIn">
+<var>${rowOffset}</var>
+<arg>${i}-1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20240122 18:08:15.348" level="INFO">${rowOffset} = 3</msg>
+<status status="PASS" starttime="20240122 18:08:15.348" endtime="20240122 18:08:15.348"/>
+</kw>
+<kw name="Write Excel Column" library="ExcelLibrary">
+<arg>col_num=${colNum}</arg>
+<arg>row_offset=${rowOffset}</arg>
+<arg>col_data=['${value}']</arg>
+<arg>sheet_name=${SheetName}</arg>
+<doc>Writes the data to a column.</doc>
+<status status="PASS" starttime="20240122 18:08:15.348" endtime="20240122 18:08:15.349"/>
+</kw>
+<kw name="Save Excel Document" library="ExcelLibrary">
+<arg>filename=${ExcelFile}</arg>
+<doc>Saves the current document to disk.</doc>
+<status status="PASS" starttime="20240122 18:08:15.349" endtime="20240122 18:08:15.360"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.347" endtime="20240122 18:08:15.360"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.347" endtime="20240122 18:08:15.360"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.347" endtime="20240122 18:08:15.360"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.346" endtime="20240122 18:08:15.360"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.345" endtime="20240122 18:08:15.360"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.345" endtime="20240122 18:08:15.360"/>
+</iter>
+<iter>
+<var name="${index}">5</var>
+<kw name="Set Variable" library="BuiltIn">
+<var>${value}</var>
+<arg>${list_to_check}[${index}]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20240122 18:08:15.360" level="INFO">${value} = lastname</msg>
+<status status="PASS" starttime="20240122 18:08:15.360" endtime="20240122 18:08:15.360"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>"${value}" != "None"</arg>
+<arg>Execute Function by checkType</arg>
+<arg>${index}</arg>
+<arg>ELSE</arg>
+<arg>Exit For Loop</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Execute Function by checkType">
+<arg>${index}</arg>
+<kw name="Get data row from Excel file">
+<var>${rd}</var>
+<arg>${i}</arg>
+<kw name="Read Excel Row" library="ExcelLibrary">
+<var>${rd}</var>
+<arg>row_num=${rowNum}</arg>
+<arg>max_num=${maxnum}</arg>
+<arg>sheet_name=${SheetName}</arg>
+<doc>Returns content of a row from the current sheet of the document.</doc>
+<msg timestamp="20240122 18:08:15.361" level="INFO">${rd} = ['Input Textbox', 'firstname', 'First Name', 'maxlength', 10, 12345678900, None, None, None, None, None, None, None, None, None, None, None, None, None, None]</msg>
+<status status="PASS" starttime="20240122 18:08:15.361" endtime="20240122 18:08:15.361"/>
+</kw>
+<msg timestamp="20240122 18:08:15.361" level="INFO">${rd} = ['Input Textbox', 'firstname', 'First Name', 'maxlength', 10, 12345678900, None, None, None, None, None, None, None, None, None, None, None, None, None, None]</msg>
+<status status="PASS" starttime="20240122 18:08:15.361" endtime="20240122 18:08:15.361"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${element}</var>
+<arg>${rd}[3]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20240122 18:08:15.362" level="INFO">${element} = maxlength</msg>
+<status status="PASS" starttime="20240122 18:08:15.361" endtime="20240122 18:08:15.362"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${element}' == 'required'</arg>
+<arg>Run Keyword</arg>
+<arg>Verify Required Check</arg>
+<arg>${i}</arg>
+<arg>ELSE IF</arg>
+<arg>'${element}' == 'maxlength'</arg>
+<arg>Run Keyword</arg>
+<arg>Write and save to Excel</arg>
+<arg>${i}</arg>
+<arg>Function_maxlength is Executed</arg>
+<arg>10</arg>
+<arg>ELSE IF</arg>
+<arg>'${element}' == 'Dateformat'</arg>
+<arg>Run Keyword</arg>
+<arg>Log</arg>
+<arg>Function3 is Executed</arg>
+<arg>ELSE</arg>
+<arg>Log</arg>
+<arg>Function is not defined</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Run Keyword" library="BuiltIn">
+<arg>Write and save to Excel</arg>
+<arg>${i}</arg>
+<arg>Function_maxlength is Executed</arg>
+<arg>10</arg>
+<doc>Executes the given keyword with the given arguments.</doc>
+<kw name="Write and save to Excel">
+<arg>${i}</arg>
+<arg>Function_maxlength is Executed</arg>
+<arg>10</arg>
+<kw name="Evaluate" library="BuiltIn">
+<var>${rowOffset}</var>
+<arg>${i}-1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20240122 18:08:15.362" level="INFO">${rowOffset} = 4</msg>
+<status status="PASS" starttime="20240122 18:08:15.362" endtime="20240122 18:08:15.362"/>
+</kw>
+<kw name="Write Excel Column" library="ExcelLibrary">
+<arg>col_num=${colNum}</arg>
+<arg>row_offset=${rowOffset}</arg>
+<arg>col_data=['${value}']</arg>
+<arg>sheet_name=${SheetName}</arg>
+<doc>Writes the data to a column.</doc>
+<status status="PASS" starttime="20240122 18:08:15.362" endtime="20240122 18:08:15.363"/>
+</kw>
+<kw name="Save Excel Document" library="ExcelLibrary">
+<arg>filename=${ExcelFile}</arg>
+<doc>Saves the current document to disk.</doc>
+<status status="PASS" starttime="20240122 18:08:15.363" endtime="20240122 18:08:15.378"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.362" endtime="20240122 18:08:15.378"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.362" endtime="20240122 18:08:15.378"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.362" endtime="20240122 18:08:15.378"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.361" endtime="20240122 18:08:15.378"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.360" endtime="20240122 18:08:15.378"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.360" endtime="20240122 18:08:15.378"/>
+</iter>
+<iter>
+<var name="${index}">6</var>
+<kw name="Set Variable" library="BuiltIn">
+<var>${value}</var>
+<arg>${list_to_check}[${index}]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20240122 18:08:15.379" level="INFO">${value} = lastname</msg>
+<status status="PASS" starttime="20240122 18:08:15.379" endtime="20240122 18:08:15.379"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>"${value}" != "None"</arg>
+<arg>Execute Function by checkType</arg>
+<arg>${index}</arg>
+<arg>ELSE</arg>
+<arg>Exit For Loop</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Execute Function by checkType">
+<arg>${index}</arg>
+<kw name="Get data row from Excel file">
+<var>${rd}</var>
+<arg>${i}</arg>
+<kw name="Read Excel Row" library="ExcelLibrary">
+<var>${rd}</var>
+<arg>row_num=${rowNum}</arg>
+<arg>max_num=${maxnum}</arg>
+<arg>sheet_name=${SheetName}</arg>
+<doc>Returns content of a row from the current sheet of the document.</doc>
+<msg timestamp="20240122 18:08:15.380" level="INFO">${rd} = ['Input Textbox', 'lastname', 'Last Name', 'maxlength', 20, 'Short text', None, None, None, None, None, None, None, None, None, None, None, None, None, None]</msg>
+<status status="PASS" starttime="20240122 18:08:15.380" endtime="20240122 18:08:15.380"/>
+</kw>
+<msg timestamp="20240122 18:08:15.380" level="INFO">${rd} = ['Input Textbox', 'lastname', 'Last Name', 'maxlength', 20, 'Short text', None, None, None, None, None, None, None, None, None, None, None, None, None, None]</msg>
+<status status="PASS" starttime="20240122 18:08:15.379" endtime="20240122 18:08:15.380"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${element}</var>
+<arg>${rd}[3]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20240122 18:08:15.380" level="INFO">${element} = maxlength</msg>
+<status status="PASS" starttime="20240122 18:08:15.380" endtime="20240122 18:08:15.380"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${element}' == 'required'</arg>
+<arg>Run Keyword</arg>
+<arg>Verify Required Check</arg>
+<arg>${i}</arg>
+<arg>ELSE IF</arg>
+<arg>'${element}' == 'maxlength'</arg>
+<arg>Run Keyword</arg>
+<arg>Write and save to Excel</arg>
+<arg>${i}</arg>
+<arg>Function_maxlength is Executed</arg>
+<arg>10</arg>
+<arg>ELSE IF</arg>
+<arg>'${element}' == 'Dateformat'</arg>
+<arg>Run Keyword</arg>
+<arg>Log</arg>
+<arg>Function3 is Executed</arg>
+<arg>ELSE</arg>
+<arg>Log</arg>
+<arg>Function is not defined</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Run Keyword" library="BuiltIn">
+<arg>Write and save to Excel</arg>
+<arg>${i}</arg>
+<arg>Function_maxlength is Executed</arg>
+<arg>10</arg>
+<doc>Executes the given keyword with the given arguments.</doc>
+<kw name="Write and save to Excel">
+<arg>${i}</arg>
+<arg>Function_maxlength is Executed</arg>
+<arg>10</arg>
+<kw name="Evaluate" library="BuiltIn">
+<var>${rowOffset}</var>
+<arg>${i}-1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20240122 18:08:15.381" level="INFO">${rowOffset} = 5</msg>
+<status status="PASS" starttime="20240122 18:08:15.381" endtime="20240122 18:08:15.381"/>
+</kw>
+<kw name="Write Excel Column" library="ExcelLibrary">
+<arg>col_num=${colNum}</arg>
+<arg>row_offset=${rowOffset}</arg>
+<arg>col_data=['${value}']</arg>
+<arg>sheet_name=${SheetName}</arg>
+<doc>Writes the data to a column.</doc>
+<status status="PASS" starttime="20240122 18:08:15.381" endtime="20240122 18:08:15.382"/>
+</kw>
+<kw name="Save Excel Document" library="ExcelLibrary">
+<arg>filename=${ExcelFile}</arg>
+<doc>Saves the current document to disk.</doc>
+<status status="PASS" starttime="20240122 18:08:15.382" endtime="20240122 18:08:15.394"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.381" endtime="20240122 18:08:15.394"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.381" endtime="20240122 18:08:15.394"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.380" endtime="20240122 18:08:15.394"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.379" endtime="20240122 18:08:15.394"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.379" endtime="20240122 18:08:15.394"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.379" endtime="20240122 18:08:15.394"/>
+</iter>
+<iter>
+<var name="${index}">7</var>
+<kw name="Set Variable" library="BuiltIn">
+<var>${value}</var>
+<arg>${list_to_check}[${index}]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20240122 18:08:15.394" level="INFO">${value} = email</msg>
+<status status="PASS" starttime="20240122 18:08:15.394" endtime="20240122 18:08:15.395"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>"${value}" != "None"</arg>
+<arg>Execute Function by checkType</arg>
+<arg>${index}</arg>
+<arg>ELSE</arg>
+<arg>Exit For Loop</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Execute Function by checkType">
+<arg>${index}</arg>
+<kw name="Get data row from Excel file">
+<var>${rd}</var>
+<arg>${i}</arg>
+<kw name="Read Excel Row" library="ExcelLibrary">
+<var>${rd}</var>
+<arg>row_num=${rowNum}</arg>
+<arg>max_num=${maxnum}</arg>
+<arg>sheet_name=${SheetName}</arg>
+<doc>Returns content of a row from the current sheet of the document.</doc>
+<msg timestamp="20240122 18:08:15.395" level="INFO">${rd} = ['Input Textbox', 'lastname', 'Last Name', 'maxlength', 20, 'This is a long text that exceeds maxlength', None, None, None, None, None, None, None, None, None, None, None, None, None, None]</msg>
+<status status="PASS" starttime="20240122 18:08:15.395" endtime="20240122 18:08:15.396"/>
+</kw>
+<msg timestamp="20240122 18:08:15.396" level="INFO">${rd} = ['Input Textbox', 'lastname', 'Last Name', 'maxlength', 20, 'This is a long text that exceeds maxlength', None, None, None, None, None, None, None, None, None, None, None, None, None, None]</msg>
+<status status="PASS" starttime="20240122 18:08:15.395" endtime="20240122 18:08:15.396"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${element}</var>
+<arg>${rd}[3]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20240122 18:08:15.396" level="INFO">${element} = maxlength</msg>
+<status status="PASS" starttime="20240122 18:08:15.396" endtime="20240122 18:08:15.396"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${element}' == 'required'</arg>
+<arg>Run Keyword</arg>
+<arg>Verify Required Check</arg>
+<arg>${i}</arg>
+<arg>ELSE IF</arg>
+<arg>'${element}' == 'maxlength'</arg>
+<arg>Run Keyword</arg>
+<arg>Write and save to Excel</arg>
+<arg>${i}</arg>
+<arg>Function_maxlength is Executed</arg>
+<arg>10</arg>
+<arg>ELSE IF</arg>
+<arg>'${element}' == 'Dateformat'</arg>
+<arg>Run Keyword</arg>
+<arg>Log</arg>
+<arg>Function3 is Executed</arg>
+<arg>ELSE</arg>
+<arg>Log</arg>
+<arg>Function is not defined</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Run Keyword" library="BuiltIn">
+<arg>Write and save to Excel</arg>
+<arg>${i}</arg>
+<arg>Function_maxlength is Executed</arg>
+<arg>10</arg>
+<doc>Executes the given keyword with the given arguments.</doc>
+<kw name="Write and save to Excel">
+<arg>${i}</arg>
+<arg>Function_maxlength is Executed</arg>
+<arg>10</arg>
+<kw name="Evaluate" library="BuiltIn">
+<var>${rowOffset}</var>
+<arg>${i}-1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20240122 18:08:15.397" level="INFO">${rowOffset} = 6</msg>
+<status status="PASS" starttime="20240122 18:08:15.396" endtime="20240122 18:08:15.397"/>
+</kw>
+<kw name="Write Excel Column" library="ExcelLibrary">
+<arg>col_num=${colNum}</arg>
+<arg>row_offset=${rowOffset}</arg>
+<arg>col_data=['${value}']</arg>
+<arg>sheet_name=${SheetName}</arg>
+<doc>Writes the data to a column.</doc>
+<status status="PASS" starttime="20240122 18:08:15.397" endtime="20240122 18:08:15.397"/>
+</kw>
+<kw name="Save Excel Document" library="ExcelLibrary">
+<arg>filename=${ExcelFile}</arg>
+<doc>Saves the current document to disk.</doc>
+<status status="PASS" starttime="20240122 18:08:15.397" endtime="20240122 18:08:15.412"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.396" endtime="20240122 18:08:15.412"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.396" endtime="20240122 18:08:15.412"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.396" endtime="20240122 18:08:15.412"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.395" endtime="20240122 18:08:15.412"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.395" endtime="20240122 18:08:15.412"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.394" endtime="20240122 18:08:15.412"/>
+</iter>
+<iter>
+<var name="${index}">8</var>
+<kw name="Set Variable" library="BuiltIn">
+<var>${value}</var>
+<arg>${list_to_check}[${index}]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20240122 18:08:15.412" level="INFO">${value} = email</msg>
+<status status="PASS" starttime="20240122 18:08:15.412" endtime="20240122 18:08:15.412"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>"${value}" != "None"</arg>
+<arg>Execute Function by checkType</arg>
+<arg>${index}</arg>
+<arg>ELSE</arg>
+<arg>Exit For Loop</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Execute Function by checkType">
+<arg>${index}</arg>
+<kw name="Get data row from Excel file">
+<var>${rd}</var>
+<arg>${i}</arg>
+<kw name="Read Excel Row" library="ExcelLibrary">
+<var>${rd}</var>
+<arg>row_num=${rowNum}</arg>
+<arg>max_num=${maxnum}</arg>
+<arg>sheet_name=${SheetName}</arg>
+<doc>Returns content of a row from the current sheet of the document.</doc>
+<msg timestamp="20240122 18:08:15.415" level="INFO">${rd} = ['Input Textbox', 'email', 'Email', 'required', None, None, None, 'Please complete this field.', None, None, None, None, None, None, None, None, None, None, None, None]</msg>
+<status status="PASS" starttime="20240122 18:08:15.414" endtime="20240122 18:08:15.415"/>
+</kw>
+<msg timestamp="20240122 18:08:15.415" level="INFO">${rd} = ['Input Textbox', 'email', 'Email', 'required', None, None, None, 'Please complete this field.', None, None, None, None, None, None, None, None, None, None, None, None]</msg>
+<status status="PASS" starttime="20240122 18:08:15.414" endtime="20240122 18:08:15.415"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${element}</var>
+<arg>${rd}[3]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20240122 18:08:15.415" level="INFO">${element} = required</msg>
+<status status="PASS" starttime="20240122 18:08:15.415" endtime="20240122 18:08:15.415"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${element}' == 'required'</arg>
+<arg>Run Keyword</arg>
+<arg>Verify Required Check</arg>
+<arg>${i}</arg>
+<arg>ELSE IF</arg>
+<arg>'${element}' == 'maxlength'</arg>
+<arg>Run Keyword</arg>
+<arg>Write and save to Excel</arg>
+<arg>${i}</arg>
+<arg>Function_maxlength is Executed</arg>
+<arg>10</arg>
+<arg>ELSE IF</arg>
+<arg>'${element}' == 'Dateformat'</arg>
+<arg>Run Keyword</arg>
+<arg>Log</arg>
+<arg>Function3 is Executed</arg>
+<arg>ELSE</arg>
+<arg>Log</arg>
+<arg>Function is not defined</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Run Keyword" library="BuiltIn">
+<arg>Verify Required Check</arg>
+<arg>${i}</arg>
+<doc>Executes the given keyword with the given arguments.</doc>
+<kw name="Verify required Check">
+<arg>${i}</arg>
+<doc>This test case validates Required Check for item in row(i) in excel file</doc>
+<kw name="Get data row from Excel file">
+<var>${rd}</var>
+<arg>${i}</arg>
+<kw name="Read Excel Row" library="ExcelLibrary">
+<var>${rd}</var>
+<arg>row_num=${rowNum}</arg>
+<arg>max_num=${maxnum}</arg>
+<arg>sheet_name=${SheetName}</arg>
+<doc>Returns content of a row from the current sheet of the document.</doc>
+<msg timestamp="20240122 18:08:15.416" level="INFO">${rd} = ['Input Textbox', 'email', 'Email', 'required', None, None, None, 'Please complete this field.', None, None, None, None, None, None, None, None, None, None, None, None]</msg>
+<status status="PASS" starttime="20240122 18:08:15.416" endtime="20240122 18:08:15.416"/>
+</kw>
+<msg timestamp="20240122 18:08:15.417" level="INFO">${rd} = ['Input Textbox', 'email', 'Email', 'required', None, None, None, 'Please complete this field.', None, None, None, None, None, None, None, None, None, None, None, None]</msg>
+<status status="PASS" starttime="20240122 18:08:15.416" endtime="20240122 18:08:15.417"/>
+</kw>
+<kw name="Get data col from Excel file">
+<var>${cd}</var>
+<arg>2</arg>
+<kw name="Read Excel Column" library="ExcelLibrary">
+<var>${cd}</var>
+<arg>col_num=${colNum}</arg>
+<arg>max_num=${maxnum}</arg>
+<arg>sheet_name=${SheetName}</arg>
+<doc>Returns content of a column from the current sheet of the document.</doc>
+<msg timestamp="20240122 18:08:15.417" level="INFO">${cd} = ['https://testsigma.com/blog/test-data/', 'itemName', 'firstname', 'firstname', 'firstname', 'lastname', 'lastname', 'email', 'email', 'email', 'email', 'company', 'company', 'company', 'Submit', None...</msg>
+<status status="PASS" starttime="20240122 18:08:15.417" endtime="20240122 18:08:15.417"/>
+</kw>
+<msg timestamp="20240122 18:08:15.417" level="INFO">${cd} = ['https://testsigma.com/blog/test-data/', 'itemName', 'firstname', 'firstname', 'firstname', 'lastname', 'lastname', 'email', 'email', 'email', 'email', 'company', 'company', 'company', 'Submit', None...</msg>
+<status status="PASS" starttime="20240122 18:08:15.417" endtime="20240122 18:08:15.417"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${rd}[1]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20240122 18:08:15.418" level="INFO">Clicking element 'email'.</msg>
+<status status="PASS" starttime="20240122 18:08:15.417" endtime="20240122 18:08:15.479"/>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<arg>${cd}[14]</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<msg timestamp="20240122 18:08:15.480" level="INFO">Clicking button 'Submit'.</msg>
+<status status="PASS" starttime="20240122 18:08:15.479" endtime="20240122 18:08:15.535"/>
+</kw>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${actualText}</var>
+<arg>${msg_css}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20240122 18:08:15.554" level="INFO">${actualText} = Please complete this required field.</msg>
+<status status="PASS" starttime="20240122 18:08:15.535" endtime="20240122 18:08:15.554"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${expectedText}</var>
+<arg>${rd}[7]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20240122 18:08:15.555" level="INFO">${expectedText} = Please complete this field.</msg>
+<status status="PASS" starttime="20240122 18:08:15.555" endtime="20240122 18:08:15.555"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>"${actualText}" == "${expectedText}"</arg>
+<arg>Write and save to Excel</arg>
+<arg>${i}</arg>
+<arg>OK</arg>
+<arg>9</arg>
+<arg>ELSE</arg>
+<arg>Result is NG</arg>
+<arg>${i}</arg>
+<arg>${actualText}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Result is NG">
+<arg>${i}</arg>
+<arg>${actualText}</arg>
+<kw name="Write and save to Excel">
+<arg>${i}</arg>
+<arg>NG</arg>
+<arg>9</arg>
+<kw name="Evaluate" library="BuiltIn">
+<var>${rowOffset}</var>
+<arg>${i}-1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20240122 18:08:15.556" level="INFO">${rowOffset} = 7</msg>
+<status status="PASS" starttime="20240122 18:08:15.556" endtime="20240122 18:08:15.556"/>
+</kw>
+<kw name="Write Excel Column" library="ExcelLibrary">
+<arg>col_num=${colNum}</arg>
+<arg>row_offset=${rowOffset}</arg>
+<arg>col_data=['${value}']</arg>
+<arg>sheet_name=${SheetName}</arg>
+<doc>Writes the data to a column.</doc>
+<status status="PASS" starttime="20240122 18:08:15.556" endtime="20240122 18:08:15.557"/>
+</kw>
+<kw name="Save Excel Document" library="ExcelLibrary">
+<arg>filename=${ExcelFile}</arg>
+<doc>Saves the current document to disk.</doc>
+<status status="PASS" starttime="20240122 18:08:15.558" endtime="20240122 18:08:15.573"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.556" endtime="20240122 18:08:15.573"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${note}</var>
+<arg>Actual Text: ${actualText}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20240122 18:08:15.574" level="INFO">${note} = Actual Text: Please complete this required field.</msg>
+<status status="PASS" starttime="20240122 18:08:15.573" endtime="20240122 18:08:15.574"/>
+</kw>
+<kw name="Write and save to Excel">
+<arg>${i}</arg>
+<arg>${note}</arg>
+<arg>10</arg>
+<kw name="Evaluate" library="BuiltIn">
+<var>${rowOffset}</var>
+<arg>${i}-1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20240122 18:08:15.574" level="INFO">${rowOffset} = 7</msg>
+<status status="PASS" starttime="20240122 18:08:15.574" endtime="20240122 18:08:15.575"/>
+</kw>
+<kw name="Write Excel Column" library="ExcelLibrary">
+<arg>col_num=${colNum}</arg>
+<arg>row_offset=${rowOffset}</arg>
+<arg>col_data=['${value}']</arg>
+<arg>sheet_name=${SheetName}</arg>
+<doc>Writes the data to a column.</doc>
+<status status="PASS" starttime="20240122 18:08:15.575" endtime="20240122 18:08:15.576"/>
+</kw>
+<kw name="Save Excel Document" library="ExcelLibrary">
+<arg>filename=${ExcelFile}</arg>
+<doc>Saves the current document to disk.</doc>
+<status status="PASS" starttime="20240122 18:08:15.576" endtime="20240122 18:08:15.593"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.574" endtime="20240122 18:08:15.593"/>
+</kw>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<var>${Img}</var>
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<msg timestamp="20240122 18:08:15.717" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-2.png"&gt;&lt;img src="selenium-screenshot-2.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg timestamp="20240122 18:08:15.717" level="INFO">${Img} = D:\THUY\RobotFramework\selenium-screenshot-2.png</msg>
+<status status="PASS" starttime="20240122 18:08:15.593" endtime="20240122 18:08:15.717"/>
+</kw>
+<kw name="Write and save to Excel">
+<arg>${i}</arg>
+<arg>${Img}</arg>
+<arg>11</arg>
+<kw name="Evaluate" library="BuiltIn">
+<var>${rowOffset}</var>
+<arg>${i}-1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20240122 18:08:15.719" level="INFO">${rowOffset} = 7</msg>
+<status status="PASS" starttime="20240122 18:08:15.718" endtime="20240122 18:08:15.719"/>
+</kw>
+<kw name="Write Excel Column" library="ExcelLibrary">
+<arg>col_num=${colNum}</arg>
+<arg>row_offset=${rowOffset}</arg>
+<arg>col_data=['${value}']</arg>
+<arg>sheet_name=${SheetName}</arg>
+<doc>Writes the data to a column.</doc>
+<status status="PASS" starttime="20240122 18:08:15.719" endtime="20240122 18:08:15.720"/>
+</kw>
+<kw name="Save Excel Document" library="ExcelLibrary">
+<arg>filename=${ExcelFile}</arg>
+<doc>Saves the current document to disk.</doc>
+<status status="PASS" starttime="20240122 18:08:15.720" endtime="20240122 18:08:15.734"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.717" endtime="20240122 18:08:15.734"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.555" endtime="20240122 18:08:15.735"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.555" endtime="20240122 18:08:15.735"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.416" endtime="20240122 18:08:15.735"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.416" endtime="20240122 18:08:15.735"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.415" endtime="20240122 18:08:15.735"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.414" endtime="20240122 18:08:15.735"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.413" endtime="20240122 18:08:15.735"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.412" endtime="20240122 18:08:15.735"/>
+</iter>
+<iter>
+<var name="${index}">9</var>
+<kw name="Set Variable" library="BuiltIn">
+<var>${value}</var>
+<arg>${list_to_check}[${index}]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20240122 18:08:15.735" level="INFO">${value} = email</msg>
+<status status="PASS" starttime="20240122 18:08:15.735" endtime="20240122 18:08:15.735"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>"${value}" != "None"</arg>
+<arg>Execute Function by checkType</arg>
+<arg>${index}</arg>
+<arg>ELSE</arg>
+<arg>Exit For Loop</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Execute Function by checkType">
+<arg>${index}</arg>
+<kw name="Get data row from Excel file">
+<var>${rd}</var>
+<arg>${i}</arg>
+<kw name="Read Excel Row" library="ExcelLibrary">
+<var>${rd}</var>
+<arg>row_num=${rowNum}</arg>
+<arg>max_num=${maxnum}</arg>
+<arg>sheet_name=${SheetName}</arg>
+<doc>Returns content of a row from the current sheet of the document.</doc>
+<msg timestamp="20240122 18:08:15.736" level="INFO">${rd} = ['Input Textbox', 'email', 'Email', 'maxlength', 20, 'Short text', None, None, None, None, None, None, None, None, None, None, None, None, None, None]</msg>
+<status status="PASS" starttime="20240122 18:08:15.736" endtime="20240122 18:08:15.736"/>
+</kw>
+<msg timestamp="20240122 18:08:15.736" level="INFO">${rd} = ['Input Textbox', 'email', 'Email', 'maxlength', 20, 'Short text', None, None, None, None, None, None, None, None, None, None, None, None, None, None]</msg>
+<status status="PASS" starttime="20240122 18:08:15.736" endtime="20240122 18:08:15.737"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${element}</var>
+<arg>${rd}[3]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20240122 18:08:15.737" level="INFO">${element} = maxlength</msg>
+<status status="PASS" starttime="20240122 18:08:15.737" endtime="20240122 18:08:15.737"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${element}' == 'required'</arg>
+<arg>Run Keyword</arg>
+<arg>Verify Required Check</arg>
+<arg>${i}</arg>
+<arg>ELSE IF</arg>
+<arg>'${element}' == 'maxlength'</arg>
+<arg>Run Keyword</arg>
+<arg>Write and save to Excel</arg>
+<arg>${i}</arg>
+<arg>Function_maxlength is Executed</arg>
+<arg>10</arg>
+<arg>ELSE IF</arg>
+<arg>'${element}' == 'Dateformat'</arg>
+<arg>Run Keyword</arg>
+<arg>Log</arg>
+<arg>Function3 is Executed</arg>
+<arg>ELSE</arg>
+<arg>Log</arg>
+<arg>Function is not defined</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Run Keyword" library="BuiltIn">
+<arg>Write and save to Excel</arg>
+<arg>${i}</arg>
+<arg>Function_maxlength is Executed</arg>
+<arg>10</arg>
+<doc>Executes the given keyword with the given arguments.</doc>
+<kw name="Write and save to Excel">
+<arg>${i}</arg>
+<arg>Function_maxlength is Executed</arg>
+<arg>10</arg>
+<kw name="Evaluate" library="BuiltIn">
+<var>${rowOffset}</var>
+<arg>${i}-1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20240122 18:08:15.738" level="INFO">${rowOffset} = 8</msg>
+<status status="PASS" starttime="20240122 18:08:15.738" endtime="20240122 18:08:15.738"/>
+</kw>
+<kw name="Write Excel Column" library="ExcelLibrary">
+<arg>col_num=${colNum}</arg>
+<arg>row_offset=${rowOffset}</arg>
+<arg>col_data=['${value}']</arg>
+<arg>sheet_name=${SheetName}</arg>
+<doc>Writes the data to a column.</doc>
+<status status="PASS" starttime="20240122 18:08:15.738" endtime="20240122 18:08:15.739"/>
+</kw>
+<kw name="Save Excel Document" library="ExcelLibrary">
+<arg>filename=${ExcelFile}</arg>
+<doc>Saves the current document to disk.</doc>
+<status status="PASS" starttime="20240122 18:08:15.739" endtime="20240122 18:08:15.755"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.738" endtime="20240122 18:08:15.755"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.737" endtime="20240122 18:08:15.755"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.737" endtime="20240122 18:08:15.755"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.735" endtime="20240122 18:08:15.755"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.735" endtime="20240122 18:08:15.755"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.735" endtime="20240122 18:08:15.755"/>
+</iter>
+<iter>
+<var name="${index}">10</var>
+<kw name="Set Variable" library="BuiltIn">
+<var>${value}</var>
+<arg>${list_to_check}[${index}]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20240122 18:08:15.756" level="INFO">${value} = email</msg>
+<status status="PASS" starttime="20240122 18:08:15.755" endtime="20240122 18:08:15.756"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>"${value}" != "None"</arg>
+<arg>Execute Function by checkType</arg>
+<arg>${index}</arg>
+<arg>ELSE</arg>
+<arg>Exit For Loop</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Execute Function by checkType">
+<arg>${index}</arg>
+<kw name="Get data row from Excel file">
+<var>${rd}</var>
+<arg>${i}</arg>
+<kw name="Read Excel Row" library="ExcelLibrary">
+<var>${rd}</var>
+<arg>row_num=${rowNum}</arg>
+<arg>max_num=${maxnum}</arg>
+<arg>sheet_name=${SheetName}</arg>
+<doc>Returns content of a row from the current sheet of the document.</doc>
+<msg timestamp="20240122 18:08:15.757" level="INFO">${rd} = ['Input Textbox', 'email', 'Email', 'maxlength', 20, 'This is a long text that exceeds maxlength', None, None, None, None, None, None, None, None, None, None, None, None, None, None]</msg>
+<status status="PASS" starttime="20240122 18:08:15.756" endtime="20240122 18:08:15.757"/>
+</kw>
+<msg timestamp="20240122 18:08:15.757" level="INFO">${rd} = ['Input Textbox', 'email', 'Email', 'maxlength', 20, 'This is a long text that exceeds maxlength', None, None, None, None, None, None, None, None, None, None, None, None, None, None]</msg>
+<status status="PASS" starttime="20240122 18:08:15.756" endtime="20240122 18:08:15.757"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${element}</var>
+<arg>${rd}[3]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20240122 18:08:15.757" level="INFO">${element} = maxlength</msg>
+<status status="PASS" starttime="20240122 18:08:15.757" endtime="20240122 18:08:15.757"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${element}' == 'required'</arg>
+<arg>Run Keyword</arg>
+<arg>Verify Required Check</arg>
+<arg>${i}</arg>
+<arg>ELSE IF</arg>
+<arg>'${element}' == 'maxlength'</arg>
+<arg>Run Keyword</arg>
+<arg>Write and save to Excel</arg>
+<arg>${i}</arg>
+<arg>Function_maxlength is Executed</arg>
+<arg>10</arg>
+<arg>ELSE IF</arg>
+<arg>'${element}' == 'Dateformat'</arg>
+<arg>Run Keyword</arg>
+<arg>Log</arg>
+<arg>Function3 is Executed</arg>
+<arg>ELSE</arg>
+<arg>Log</arg>
+<arg>Function is not defined</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Run Keyword" library="BuiltIn">
+<arg>Write and save to Excel</arg>
+<arg>${i}</arg>
+<arg>Function_maxlength is Executed</arg>
+<arg>10</arg>
+<doc>Executes the given keyword with the given arguments.</doc>
+<kw name="Write and save to Excel">
+<arg>${i}</arg>
+<arg>Function_maxlength is Executed</arg>
+<arg>10</arg>
+<kw name="Evaluate" library="BuiltIn">
+<var>${rowOffset}</var>
+<arg>${i}-1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20240122 18:08:15.758" level="INFO">${rowOffset} = 9</msg>
+<status status="PASS" starttime="20240122 18:08:15.758" endtime="20240122 18:08:15.758"/>
+</kw>
+<kw name="Write Excel Column" library="ExcelLibrary">
+<arg>col_num=${colNum}</arg>
+<arg>row_offset=${rowOffset}</arg>
+<arg>col_data=['${value}']</arg>
+<arg>sheet_name=${SheetName}</arg>
+<doc>Writes the data to a column.</doc>
+<status status="PASS" starttime="20240122 18:08:15.758" endtime="20240122 18:08:15.758"/>
+</kw>
+<kw name="Save Excel Document" library="ExcelLibrary">
+<arg>filename=${ExcelFile}</arg>
+<doc>Saves the current document to disk.</doc>
+<status status="PASS" starttime="20240122 18:08:15.758" endtime="20240122 18:08:15.768"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.757" endtime="20240122 18:08:15.768"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.757" endtime="20240122 18:08:15.768"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.757" endtime="20240122 18:08:15.768"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.756" endtime="20240122 18:08:15.768"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.756" endtime="20240122 18:08:15.768"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.755" endtime="20240122 18:08:15.768"/>
+</iter>
+<iter>
+<var name="${index}">11</var>
+<kw name="Set Variable" library="BuiltIn">
+<var>${value}</var>
+<arg>${list_to_check}[${index}]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20240122 18:08:15.769" level="INFO">${value} = company</msg>
+<status status="PASS" starttime="20240122 18:08:15.768" endtime="20240122 18:08:15.769"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>"${value}" != "None"</arg>
+<arg>Execute Function by checkType</arg>
+<arg>${index}</arg>
+<arg>ELSE</arg>
+<arg>Exit For Loop</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Execute Function by checkType">
+<arg>${index}</arg>
+<kw name="Get data row from Excel file">
+<var>${rd}</var>
+<arg>${i}</arg>
+<kw name="Read Excel Row" library="ExcelLibrary">
+<var>${rd}</var>
+<arg>row_num=${rowNum}</arg>
+<arg>max_num=${maxnum}</arg>
+<arg>sheet_name=${SheetName}</arg>
+<doc>Returns content of a row from the current sheet of the document.</doc>
+<msg timestamp="20240122 18:08:15.770" level="INFO">${rd} = ['Input Textbox', 'email', 'Email', 'emailFormat', None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None]</msg>
+<status status="PASS" starttime="20240122 18:08:15.769" endtime="20240122 18:08:15.770"/>
+</kw>
+<msg timestamp="20240122 18:08:15.770" level="INFO">${rd} = ['Input Textbox', 'email', 'Email', 'emailFormat', None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None]</msg>
+<status status="PASS" starttime="20240122 18:08:15.769" endtime="20240122 18:08:15.770"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${element}</var>
+<arg>${rd}[3]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20240122 18:08:15.770" level="INFO">${element} = emailFormat</msg>
+<status status="PASS" starttime="20240122 18:08:15.770" endtime="20240122 18:08:15.770"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${element}' == 'required'</arg>
+<arg>Run Keyword</arg>
+<arg>Verify Required Check</arg>
+<arg>${i}</arg>
+<arg>ELSE IF</arg>
+<arg>'${element}' == 'maxlength'</arg>
+<arg>Run Keyword</arg>
+<arg>Write and save to Excel</arg>
+<arg>${i}</arg>
+<arg>Function_maxlength is Executed</arg>
+<arg>10</arg>
+<arg>ELSE IF</arg>
+<arg>'${element}' == 'Dateformat'</arg>
+<arg>Run Keyword</arg>
+<arg>Log</arg>
+<arg>Function3 is Executed</arg>
+<arg>ELSE</arg>
+<arg>Log</arg>
+<arg>Function is not defined</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Log" library="BuiltIn">
+<arg>Function is not defined</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20240122 18:08:15.771" level="INFO">Function is not defined</msg>
+<status status="PASS" starttime="20240122 18:08:15.771" endtime="20240122 18:08:15.771"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.770" endtime="20240122 18:08:15.771"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.769" endtime="20240122 18:08:15.771"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.769" endtime="20240122 18:08:15.771"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.768" endtime="20240122 18:08:15.771"/>
+</iter>
+<iter>
+<var name="${index}">12</var>
+<kw name="Set Variable" library="BuiltIn">
+<var>${value}</var>
+<arg>${list_to_check}[${index}]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20240122 18:08:15.771" level="INFO">${value} = company</msg>
+<status status="PASS" starttime="20240122 18:08:15.771" endtime="20240122 18:08:15.771"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>"${value}" != "None"</arg>
+<arg>Execute Function by checkType</arg>
+<arg>${index}</arg>
+<arg>ELSE</arg>
+<arg>Exit For Loop</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Execute Function by checkType">
+<arg>${index}</arg>
+<kw name="Get data row from Excel file">
+<var>${rd}</var>
+<arg>${i}</arg>
+<kw name="Read Excel Row" library="ExcelLibrary">
+<var>${rd}</var>
+<arg>row_num=${rowNum}</arg>
+<arg>max_num=${maxnum}</arg>
+<arg>sheet_name=${SheetName}</arg>
+<doc>Returns content of a row from the current sheet of the document.</doc>
+<msg timestamp="20240122 18:08:15.772" level="INFO">${rd} = ['Input Textbox', 'company', 'Company name', 'required', None, None, None, 'Please complete this required field.', None, None, None, None, None, None, None, None, None, None, None, None]</msg>
+<status status="PASS" starttime="20240122 18:08:15.772" endtime="20240122 18:08:15.772"/>
+</kw>
+<msg timestamp="20240122 18:08:15.772" level="INFO">${rd} = ['Input Textbox', 'company', 'Company name', 'required', None, None, None, 'Please complete this required field.', None, None, None, None, None, None, None, None, None, None, None, None]</msg>
+<status status="PASS" starttime="20240122 18:08:15.772" endtime="20240122 18:08:15.772"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${element}</var>
+<arg>${rd}[3]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20240122 18:08:15.772" level="INFO">${element} = required</msg>
+<status status="PASS" starttime="20240122 18:08:15.772" endtime="20240122 18:08:15.772"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${element}' == 'required'</arg>
+<arg>Run Keyword</arg>
+<arg>Verify Required Check</arg>
+<arg>${i}</arg>
+<arg>ELSE IF</arg>
+<arg>'${element}' == 'maxlength'</arg>
+<arg>Run Keyword</arg>
+<arg>Write and save to Excel</arg>
+<arg>${i}</arg>
+<arg>Function_maxlength is Executed</arg>
+<arg>10</arg>
+<arg>ELSE IF</arg>
+<arg>'${element}' == 'Dateformat'</arg>
+<arg>Run Keyword</arg>
+<arg>Log</arg>
+<arg>Function3 is Executed</arg>
+<arg>ELSE</arg>
+<arg>Log</arg>
+<arg>Function is not defined</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Run Keyword" library="BuiltIn">
+<arg>Verify Required Check</arg>
+<arg>${i}</arg>
+<doc>Executes the given keyword with the given arguments.</doc>
+<kw name="Verify required Check">
+<arg>${i}</arg>
+<doc>This test case validates Required Check for item in row(i) in excel file</doc>
+<kw name="Get data row from Excel file">
+<var>${rd}</var>
+<arg>${i}</arg>
+<kw name="Read Excel Row" library="ExcelLibrary">
+<var>${rd}</var>
+<arg>row_num=${rowNum}</arg>
+<arg>max_num=${maxnum}</arg>
+<arg>sheet_name=${SheetName}</arg>
+<doc>Returns content of a row from the current sheet of the document.</doc>
+<msg timestamp="20240122 18:08:15.774" level="INFO">${rd} = ['Input Textbox', 'company', 'Company name', 'required', None, None, None, 'Please complete this required field.', None, None, None, None, None, None, None, None, None, None, None, None]</msg>
+<status status="PASS" starttime="20240122 18:08:15.773" endtime="20240122 18:08:15.774"/>
+</kw>
+<msg timestamp="20240122 18:08:15.774" level="INFO">${rd} = ['Input Textbox', 'company', 'Company name', 'required', None, None, None, 'Please complete this required field.', None, None, None, None, None, None, None, None, None, None, None, None]</msg>
+<status status="PASS" starttime="20240122 18:08:15.773" endtime="20240122 18:08:15.774"/>
+</kw>
+<kw name="Get data col from Excel file">
+<var>${cd}</var>
+<arg>2</arg>
+<kw name="Read Excel Column" library="ExcelLibrary">
+<var>${cd}</var>
+<arg>col_num=${colNum}</arg>
+<arg>max_num=${maxnum}</arg>
+<arg>sheet_name=${SheetName}</arg>
+<doc>Returns content of a column from the current sheet of the document.</doc>
+<msg timestamp="20240122 18:08:15.774" level="INFO">${cd} = ['https://testsigma.com/blog/test-data/', 'itemName', 'firstname', 'firstname', 'firstname', 'lastname', 'lastname', 'email', 'email', 'email', 'email', 'company', 'company', 'company', 'Submit', None...</msg>
+<status status="PASS" starttime="20240122 18:08:15.774" endtime="20240122 18:08:15.774"/>
+</kw>
+<msg timestamp="20240122 18:08:15.774" level="INFO">${cd} = ['https://testsigma.com/blog/test-data/', 'itemName', 'firstname', 'firstname', 'firstname', 'lastname', 'lastname', 'email', 'email', 'email', 'email', 'company', 'company', 'company', 'Submit', None...</msg>
+<status status="PASS" starttime="20240122 18:08:15.774" endtime="20240122 18:08:15.774"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${rd}[1]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20240122 18:08:15.775" level="INFO">Clicking element 'company'.</msg>
+<status status="PASS" starttime="20240122 18:08:15.774" endtime="20240122 18:08:15.829"/>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<arg>${cd}[14]</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<msg timestamp="20240122 18:08:15.830" level="INFO">Clicking button 'Submit'.</msg>
+<status status="PASS" starttime="20240122 18:08:15.829" endtime="20240122 18:08:15.886"/>
+</kw>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${actualText}</var>
+<arg>${msg_css}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20240122 18:08:15.917" level="INFO">${actualText} = Please complete this required field.</msg>
+<status status="PASS" starttime="20240122 18:08:15.886" endtime="20240122 18:08:15.917"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${expectedText}</var>
+<arg>${rd}[7]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20240122 18:08:15.917" level="INFO">${expectedText} = Please complete this required field.</msg>
+<status status="PASS" starttime="20240122 18:08:15.917" endtime="20240122 18:08:15.917"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>"${actualText}" == "${expectedText}"</arg>
+<arg>Write and save to Excel</arg>
+<arg>${i}</arg>
+<arg>OK</arg>
+<arg>9</arg>
+<arg>ELSE</arg>
+<arg>Result is NG</arg>
+<arg>${i}</arg>
+<arg>${actualText}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Write and save to Excel">
+<arg>${i}</arg>
+<arg>OK</arg>
+<arg>9</arg>
+<kw name="Evaluate" library="BuiltIn">
+<var>${rowOffset}</var>
+<arg>${i}-1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20240122 18:08:15.919" level="INFO">${rowOffset} = 11</msg>
+<status status="PASS" starttime="20240122 18:08:15.918" endtime="20240122 18:08:15.919"/>
+</kw>
+<kw name="Write Excel Column" library="ExcelLibrary">
+<arg>col_num=${colNum}</arg>
+<arg>row_offset=${rowOffset}</arg>
+<arg>col_data=['${value}']</arg>
+<arg>sheet_name=${SheetName}</arg>
+<doc>Writes the data to a column.</doc>
+<status status="PASS" starttime="20240122 18:08:15.919" endtime="20240122 18:08:15.919"/>
+</kw>
+<kw name="Save Excel Document" library="ExcelLibrary">
+<arg>filename=${ExcelFile}</arg>
+<doc>Saves the current document to disk.</doc>
+<status status="PASS" starttime="20240122 18:08:15.919" endtime="20240122 18:08:15.929"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.918" endtime="20240122 18:08:15.929"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.918" endtime="20240122 18:08:15.929"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.773" endtime="20240122 18:08:15.929"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.773" endtime="20240122 18:08:15.929"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.773" endtime="20240122 18:08:15.929"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.772" endtime="20240122 18:08:15.929"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.771" endtime="20240122 18:08:15.929"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.771" endtime="20240122 18:08:15.929"/>
+</iter>
+<iter>
+<var name="${index}">13</var>
+<kw name="Set Variable" library="BuiltIn">
+<var>${value}</var>
+<arg>${list_to_check}[${index}]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20240122 18:08:15.930" level="INFO">${value} = company</msg>
+<status status="PASS" starttime="20240122 18:08:15.929" endtime="20240122 18:08:15.930"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>"${value}" != "None"</arg>
+<arg>Execute Function by checkType</arg>
+<arg>${index}</arg>
+<arg>ELSE</arg>
+<arg>Exit For Loop</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Execute Function by checkType">
+<arg>${index}</arg>
+<kw name="Get data row from Excel file">
+<var>${rd}</var>
+<arg>${i}</arg>
+<kw name="Read Excel Row" library="ExcelLibrary">
+<var>${rd}</var>
+<arg>row_num=${rowNum}</arg>
+<arg>max_num=${maxnum}</arg>
+<arg>sheet_name=${SheetName}</arg>
+<doc>Returns content of a row from the current sheet of the document.</doc>
+<msg timestamp="20240122 18:08:15.931" level="INFO">${rd} = ['Input Textbox', 'company', 'Company name', 'maxlength', 50, 'Short text', None, None, None, None, None, None, None, None, None, None, None, None, None, None]</msg>
+<status status="PASS" starttime="20240122 18:08:15.930" endtime="20240122 18:08:15.931"/>
+</kw>
+<msg timestamp="20240122 18:08:15.931" level="INFO">${rd} = ['Input Textbox', 'company', 'Company name', 'maxlength', 50, 'Short text', None, None, None, None, None, None, None, None, None, None, None, None, None, None]</msg>
+<status status="PASS" starttime="20240122 18:08:15.930" endtime="20240122 18:08:15.931"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${element}</var>
+<arg>${rd}[3]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20240122 18:08:15.931" level="INFO">${element} = maxlength</msg>
+<status status="PASS" starttime="20240122 18:08:15.931" endtime="20240122 18:08:15.931"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${element}' == 'required'</arg>
+<arg>Run Keyword</arg>
+<arg>Verify Required Check</arg>
+<arg>${i}</arg>
+<arg>ELSE IF</arg>
+<arg>'${element}' == 'maxlength'</arg>
+<arg>Run Keyword</arg>
+<arg>Write and save to Excel</arg>
+<arg>${i}</arg>
+<arg>Function_maxlength is Executed</arg>
+<arg>10</arg>
+<arg>ELSE IF</arg>
+<arg>'${element}' == 'Dateformat'</arg>
+<arg>Run Keyword</arg>
+<arg>Log</arg>
+<arg>Function3 is Executed</arg>
+<arg>ELSE</arg>
+<arg>Log</arg>
+<arg>Function is not defined</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Run Keyword" library="BuiltIn">
+<arg>Write and save to Excel</arg>
+<arg>${i}</arg>
+<arg>Function_maxlength is Executed</arg>
+<arg>10</arg>
+<doc>Executes the given keyword with the given arguments.</doc>
+<kw name="Write and save to Excel">
+<arg>${i}</arg>
+<arg>Function_maxlength is Executed</arg>
+<arg>10</arg>
+<kw name="Evaluate" library="BuiltIn">
+<var>${rowOffset}</var>
+<arg>${i}-1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20240122 18:08:15.933" level="INFO">${rowOffset} = 12</msg>
+<status status="PASS" starttime="20240122 18:08:15.933" endtime="20240122 18:08:15.933"/>
+</kw>
+<kw name="Write Excel Column" library="ExcelLibrary">
+<arg>col_num=${colNum}</arg>
+<arg>row_offset=${rowOffset}</arg>
+<arg>col_data=['${value}']</arg>
+<arg>sheet_name=${SheetName}</arg>
+<doc>Writes the data to a column.</doc>
+<status status="PASS" starttime="20240122 18:08:15.933" endtime="20240122 18:08:15.933"/>
+</kw>
+<kw name="Save Excel Document" library="ExcelLibrary">
+<arg>filename=${ExcelFile}</arg>
+<doc>Saves the current document to disk.</doc>
+<status status="PASS" starttime="20240122 18:08:15.933" endtime="20240122 18:08:15.944"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.932" endtime="20240122 18:08:15.944"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.931" endtime="20240122 18:08:15.944"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.931" endtime="20240122 18:08:15.944"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.930" endtime="20240122 18:08:15.944"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.930" endtime="20240122 18:08:15.944"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.929" endtime="20240122 18:08:15.944"/>
+</iter>
+<iter>
+<var name="${index}">14</var>
+<kw name="Set Variable" library="BuiltIn">
+<var>${value}</var>
+<arg>${list_to_check}[${index}]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20240122 18:08:15.945" level="INFO">${value} = Submit</msg>
+<status status="PASS" starttime="20240122 18:08:15.945" endtime="20240122 18:08:15.945"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>"${value}" != "None"</arg>
+<arg>Execute Function by checkType</arg>
+<arg>${index}</arg>
+<arg>ELSE</arg>
+<arg>Exit For Loop</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Execute Function by checkType">
+<arg>${index}</arg>
+<kw name="Get data row from Excel file">
+<var>${rd}</var>
+<arg>${i}</arg>
+<kw name="Read Excel Row" library="ExcelLibrary">
+<var>${rd}</var>
+<arg>row_num=${rowNum}</arg>
+<arg>max_num=${maxnum}</arg>
+<arg>sheet_name=${SheetName}</arg>
+<doc>Returns content of a row from the current sheet of the document.</doc>
+<msg timestamp="20240122 18:08:15.946" level="INFO">${rd} = ['Input Textbox', 'company', 'Company name', 'maxlength', 50, 'This is a long text that exceeds maxlength with value = 50', None, None, None, None, None, None, None, None, None, None, None, None, None...</msg>
+<status status="PASS" starttime="20240122 18:08:15.946" endtime="20240122 18:08:15.946"/>
+</kw>
+<msg timestamp="20240122 18:08:15.946" level="INFO">${rd} = ['Input Textbox', 'company', 'Company name', 'maxlength', 50, 'This is a long text that exceeds maxlength with value = 50', None, None, None, None, None, None, None, None, None, None, None, None, None...</msg>
+<status status="PASS" starttime="20240122 18:08:15.945" endtime="20240122 18:08:15.946"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${element}</var>
+<arg>${rd}[3]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20240122 18:08:15.946" level="INFO">${element} = maxlength</msg>
+<status status="PASS" starttime="20240122 18:08:15.946" endtime="20240122 18:08:15.946"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${element}' == 'required'</arg>
+<arg>Run Keyword</arg>
+<arg>Verify Required Check</arg>
+<arg>${i}</arg>
+<arg>ELSE IF</arg>
+<arg>'${element}' == 'maxlength'</arg>
+<arg>Run Keyword</arg>
+<arg>Write and save to Excel</arg>
+<arg>${i}</arg>
+<arg>Function_maxlength is Executed</arg>
+<arg>10</arg>
+<arg>ELSE IF</arg>
+<arg>'${element}' == 'Dateformat'</arg>
+<arg>Run Keyword</arg>
+<arg>Log</arg>
+<arg>Function3 is Executed</arg>
+<arg>ELSE</arg>
+<arg>Log</arg>
+<arg>Function is not defined</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Run Keyword" library="BuiltIn">
+<arg>Write and save to Excel</arg>
+<arg>${i}</arg>
+<arg>Function_maxlength is Executed</arg>
+<arg>10</arg>
+<doc>Executes the given keyword with the given arguments.</doc>
+<kw name="Write and save to Excel">
+<arg>${i}</arg>
+<arg>Function_maxlength is Executed</arg>
+<arg>10</arg>
+<kw name="Evaluate" library="BuiltIn">
+<var>${rowOffset}</var>
+<arg>${i}-1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20240122 18:08:15.947" level="INFO">${rowOffset} = 13</msg>
+<status status="PASS" starttime="20240122 18:08:15.947" endtime="20240122 18:08:15.947"/>
+</kw>
+<kw name="Write Excel Column" library="ExcelLibrary">
+<arg>col_num=${colNum}</arg>
+<arg>row_offset=${rowOffset}</arg>
+<arg>col_data=['${value}']</arg>
+<arg>sheet_name=${SheetName}</arg>
+<doc>Writes the data to a column.</doc>
+<status status="PASS" starttime="20240122 18:08:15.947" endtime="20240122 18:08:15.948"/>
+</kw>
+<kw name="Save Excel Document" library="ExcelLibrary">
+<arg>filename=${ExcelFile}</arg>
+<doc>Saves the current document to disk.</doc>
+<status status="PASS" starttime="20240122 18:08:15.948" endtime="20240122 18:08:15.963"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.947" endtime="20240122 18:08:15.963"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.947" endtime="20240122 18:08:15.963"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.946" endtime="20240122 18:08:15.964"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.945" endtime="20240122 18:08:15.964"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.945" endtime="20240122 18:08:15.964"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.944" endtime="20240122 18:08:15.964"/>
+</iter>
+<iter>
+<var name="${index}">15</var>
+<kw name="Set Variable" library="BuiltIn">
+<var>${value}</var>
+<arg>${list_to_check}[${index}]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20240122 18:08:15.964" level="INFO">${value} = None</msg>
+<status status="PASS" starttime="20240122 18:08:15.964" endtime="20240122 18:08:15.964"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>"${value}" != "None"</arg>
+<arg>Execute Function by checkType</arg>
+<arg>${index}</arg>
+<arg>ELSE</arg>
+<arg>Exit For Loop</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Exit For Loop" library="BuiltIn">
+<doc>Stops executing the enclosing FOR loop.</doc>
+<msg timestamp="20240122 18:08:15.964" level="INFO">Exiting for loop altogether.</msg>
+<status status="PASS" starttime="20240122 18:08:15.964" endtime="20240122 18:08:15.964"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.964" endtime="20240122 18:08:15.964"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.964" endtime="20240122 18:08:15.965"/>
+</iter>
+<status status="PASS" starttime="20240122 18:08:15.005" endtime="20240122 18:08:15.965"/>
+</for>
+<status status="PASS" starttime="20240122 18:08:15.004" endtime="20240122 18:08:15.965"/>
+</kw>
+<kw name="Run Keywords" library="BuiltIn" type="TEARDOWN">
+<arg>Close Browser</arg>
+<arg>Close All Excel Documents</arg>
+<doc>Executes all the given keywords in a sequence.</doc>
+<kw name="Close Browser" library="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" starttime="20240122 18:08:15.966" endtime="20240122 18:08:18.121"/>
+</kw>
+<kw name="Close All Excel Documents" library="ExcelLibrary">
+<doc>Closes all opened documents.</doc>
+<status status="PASS" starttime="20240122 18:08:18.121" endtime="20240122 18:08:18.121"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:15.965" endtime="20240122 18:08:18.121"/>
+</kw>
+<doc>This script is used to get locators of items defined in excel file. Depends on checkType,
+execute validation check then return result to excel file</doc>
+<status status="PASS" starttime="20240122 18:08:09.170" endtime="20240122 18:08:18.122"/>
+</test>
+<kw name="Stop Recording Suite" library="AutoRecorder">
+<arg>Demo</arg>
+<doc>There is no need to execute this keyword manually.</doc>
+<msg timestamp="20240122 18:08:18.145" level="INFO" html="true">&lt;a href="recording_1.webm"&gt;&lt;video width="800px" autoplay&gt;&lt;source src="recording_1.webm" type="video/webm"&gt;&lt;/video&gt;&lt;/a&gt;</msg>
+<status status="PASS" starttime="20240122 18:08:18.123" endtime="20240122 18:08:18.145"/>
+</kw>
+<status status="PASS" starttime="20240122 18:08:06.667" endtime="20240122 18:08:18.123"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="0" skip="0" id="s1" name="Demo">Demo</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
